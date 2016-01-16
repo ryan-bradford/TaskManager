@@ -18,7 +18,7 @@ public class CPUCore extends Thread { // A Single thread that handles a passed l
 				tasks = tasks1;
 			}
 			for (int i = 0; i < tasks.size(); i++) { // Finds the shortest wait
-				tasks.get(i).numShortWaitsPassed = 0;
+				tasks.get(i).lastTimeRun = System.currentTimeMillis();
 			}
 			shortestWait = 1;
 		} catch (NullPointerException ex) {
@@ -40,16 +40,15 @@ public class CPUCore extends Thread { // A Single thread that handles a passed l
 															// It does this by multiplying the short wait count by the short wait
 															// And checks if it is >= to the wait of the task
 					currentTask = itr.next();
-					if (currentTask.numShortWaitsPassed * shortestWait >= currentTask.getWait()) { // If it does it will execute the task
-						currentTask.numShortWaitsPassed = 0; // It will reset the short waits passed for said task
+					double timePassed = System.currentTimeMillis() - currentTask.lastTimeRun;
+					if (timePassed >= currentTask.getWait()) { // If it does it will execute the task
+						currentTask.lastTimeRun = System.currentTimeMillis(); // It will reset the short waits passed for said task
 						if (currentTask.returnRunnable() == true) {
 							currentTask.runTask();
 						}
 						if(currentTask.toRemove) {
 							itr.remove();
 						}
-					} else { // If it isnt
-						currentTask.numShortWaitsPassed++; // It will add one to the short waits passed
 					}
 				}
 			} catch (NullPointerException ex) {

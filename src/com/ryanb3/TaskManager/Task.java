@@ -2,7 +2,7 @@ package com.ryanb3.TaskManager;
 
 public class Task {
 	
-	int numShortWaitsPassed = 0;
+	double lastTimeRun = 0.0;
 	boolean started = false; 
 	boolean toRemove = false;
 	int CPUCore;
