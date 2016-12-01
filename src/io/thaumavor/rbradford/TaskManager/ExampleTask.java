@@ -1,4 +1,4 @@
-package com.ryanb3.TaskManager;
+package io.thaumavor.rbradford.TaskManager;
 
 public class ExampleTask extends Task {
 

@@ -1,4 +1,4 @@
-package com.ryanb3.TaskManager;
+package io.thaumavor.rbradford.TaskManager;
 
 public class TaskManager { // The thing that distributes the tasks to the different cores
 	public CPUCore[] cores;
